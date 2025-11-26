@@ -1,0 +1,99 @@
+<script>
+const user = sessionStorage.getItem('greenfresh_user');
+if (!user) window.location.href = 'login.html';
+
+// URL BACKEND PHP
+const BASE_URL = "http://localhost/PROJECT1/backend/api";
+
+async function loadProducts(){
+  const res = await fetch(`${BASE_URL}/products.php`);
+  const data = await res.json();
+  const area = document.getElementById('produk-area');
+  area.innerHTML = '';
+  data.forEach(p => {
+    area.innerHTML += `
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="assets/images/${p.gambar}" class="card-img-top" style="height:200px;object-fit:cover">
+          <div class="card-body">
+            <h5>${p.nama}</h5>
+            <p>${p.deskripsi || ''}</p>
+            <p><strong>${p.harga}</strong></p>
+            <p>Stok: ${p.stok}</p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-success" onclick="viewProduct(${p.id})">Detail</button>
+              <button class="btn btn-warning" onclick="editProduct(${p.id})">Edit</button>
+              <button class="btn btn-danger" onclick="deleteProduct(${p.id})">Hapus</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+async function viewProduct(id){
+  const res = await fetch(`${BASE_URL}/product-id.php?id=${id}`);
+  const p = await res.json();
+  alert('Produk: ' + p.nama + '\nHarga: ' + p.harga + '\nDeskripsi: ' + p.deskripsi);
+}
+
+function logout(){
+  sessionStorage.removeItem('greenfresh_user');
+  window.location.href = 'login.html';
+}
+
+async function editProduct(id){
+  const nama = prompt('Nama baru:');
+  if (!nama) return;
+
+  const harga = prompt('Harga baru:');
+  if (harga === null) return;
+
+  const stok = prompt('Stok:', 'Tersedia');
+  if (stok === null) return;
+
+  const payload = { nama, harga, stok };
+
+  await fetch(`${BASE_URL}/product-id.php?id=${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  loadProducts();
+}
+
+async function deleteProduct(id){
+  if (!confirm('Hapus produk ini?')) return;
+
+  await fetch(`${BASE_URL}/product-id.php?id=${id}`, {
+    method: 'DELETE'
+  });
+
+  loadProducts();
+}
+
+document.getElementById('formAdd').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const fd = new FormData(e.target);
+
+  const payload = {
+    nama: fd.get('nama'),
+    deskripsi: '',
+    harga: fd.get('harga'),
+    stok: fd.get('stok'),
+    gambar: fd.get('gambar') || 'placeholder.jpg'
+  };
+
+  await fetch(`${BASE_URL}/products.php`, {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  e.target.reset();
+  loadProducts();
+});
+
+loadProducts();
+</script>

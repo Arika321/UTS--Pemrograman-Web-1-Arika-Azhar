@@ -1,0 +1,10 @@
+{
+  "products": [
+    { "id": 1, "nama": "Terong", "deskripsi": "Terong segar dari petani lokal.", "harga": "Rp 6.000 / kg", "stok": "Tersedia", "gambar": "terong.jpg" },
+    { "id": 2, "nama": "Kol", "deskripsi": "Kol putih dan kol keriting segar.", "harga": "Rp 10.000 / kg", "stok": "Tersedia", "gambar": "kol.jpg" },
+    { "id": 3, "nama": "Jagung", "deskripsi": "Jagung manis kualitas premium.", "harga": "Rp 8.000 / tongkol", "stok": "Tersedia", "gambar": "jagung.jpg" },
+    { "id": 4, "nama": "Cabai", "deskripsi": "Cabai merah segar, pedas.", "harga": "Rp 40.000 / kg", "stok": "Stok menipis", "gambar": "cabai.jpg" },
+    { "id": 5, "nama": "Wortel", "deskripsi": "Wortel segar untuk konsumsi harian.", "harga": "Rp 12.000 / kg", "stok": "Tersedia", "gambar": "wortel.jpg" },
+    { "id": 6, "nama": "Pisang", "deskripsi": "Pisang kualitas ekspor.", "harga": "Rp 20.000 / sisir", "stok": "Tersedia", "gambar": "pisang.jpg" }
+  ]
+}
