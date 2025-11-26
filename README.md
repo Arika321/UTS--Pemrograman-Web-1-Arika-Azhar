@@ -55,12 +55,12 @@ Aplikasi ini juga memiliki fitur **Login, Registrasi**, dan **API CRUD (GET, POS
 
 ---
 
-## ❌ DELETE Product
+## ❌  ✏️ PUT 
 <img src="https://github.com/user-attachments/assets/45cb0aae-26e0-4e31-9057-5d48f86d7bd8" width="600"/>
 
 ---
 
-## ✏️ PUT Update Product
+## ❌  DELETE
 <img src="https://github.com/user-attachments/assets/9a7e8fc0-60b5-465b-a38e-3762a030b41d" width="600"/>
 
 ---
